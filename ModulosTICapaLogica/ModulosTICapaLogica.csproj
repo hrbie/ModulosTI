@@ -61,7 +61,6 @@
     </Compile>
     <Compile Include="ModuloReservacion\Reservacion.cs" />
     <Compile Include="ModuloSGC\ErroresExcel.cs" />
-    <Compile Include="ModuloSGC\GenExcell.cs" />
     <Compile Include="ModuloSolicitudes\Avance.cs" />
     <Compile Include="ModuloSolicitudes\Solicitud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

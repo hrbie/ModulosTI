@@ -587,35 +587,26 @@ namespace ModulosTIControlador.Clases
 			return estados;
 		}
 		
-		#endregion
+		
 
-        public List<List<object>> crearArchivoUsuariosPorFecha(DateTime _fechaInicial, DateTime _fechaFinal)
+        public List<List<string>> crearArchivoUsuariosPorFecha(DateTime _fechaInicial, DateTime _fechaFinal)
         {
             List<List<object>> resultado = _conexionSGC.consultarUsuariosPorFecha(_fechaInicial, _fechaFinal);
-            
-            GenExcell ge = new GenExcell();
-            
-            string nombreArchivo = "Cuentas Creadas entre " + _fechaInicial.Date.Day.ToString() + "-" + _fechaInicial.Month.ToString() + "-" + _fechaInicial.Year.ToString() + " y " + _fechaFinal.Day.ToString() + "-" + _fechaFinal.Month.ToString() + "-" + _fechaFinal.Year.ToString() + ".csv";
-            //poner q el usuario seleccione donde guardar el archivo
-            string direccion = "/Documentos/";
-                  
-            ge.DoExcell(direccion + nombreArchivo, resultado);
+            List<List<string>> contenido = new List<List<string>>();
+            List<string> fila = new List<string>();
 
-            //logra descargar el archivo al cliente pero no le consulta
-            try
+            foreach (List<object> i in resultado)
             {
-                WebClient webClient = new WebClient();
-                webClient.DownloadFile(direccion + nombreArchivo, @"C:/Descargas/"+nombreArchivo);
-
-                //System.Diagnostics.Process.Start(@"C:/Documentos/"+nombreArchivo);
-                System.Diagnostics.Process.Start(@"http://172.19.16.201/workflow" + nombreArchivo);
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine("Problem: " + ex.Message);
+                foreach (object j in i)
+                {
+                    fila.Add(j.ToString());
+                }
+                contenido.Add(fila);
+                fila = new List<string>();
             }
 
-            return resultado;     
+            return contenido;     
         }
+        #endregion
     }
 }

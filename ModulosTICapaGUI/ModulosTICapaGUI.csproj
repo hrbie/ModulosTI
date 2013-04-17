@@ -455,6 +455,10 @@
     <Content Include="Compartido\Master.master" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ModulosTICapaDatos\ModulosTICapaDatos.csproj">
+      <Project>{C1DE63A5-AD39-4C8A-9499-16E7239610B9}</Project>
+      <Name>ModulosTICapaDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModulosTICapaLogica\ModulosTICapaLogica.csproj">
       <Project>{6AF9F67C-B9C0-4A32-A051-5BABA60E80DE}</Project>
       <Name>ModulosTICapaLogica</Name>

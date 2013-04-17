@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ModulosTICapaGUI.Compartido;
 using ModulosTIControlador.Clases;
+using ModulosTICapaDatos.Compartido;
 using System.Data;
 using System.Threading;
 
@@ -92,61 +93,6 @@ namespace ModulosTICapaGUI.ModuloBitacora
             }
         }
 
-        //titulos es una lista con los titulos de las columnas que tendrá el reporte
-        //contenido es una lista de listas de string en el que cada nodo de la lista tiene una fila del reporte
-        public void generarReporte(string nombreHoja, List<string> titulos, List<List<string>> contenido){
-            Thread STAThread = new Thread( ()=>
-            {
-                //hacer las validaciones de tamaño del reporte
-                //maximo 26 columnas
-
-                // Create a new workbook.
-                SpreadsheetGear.IWorkbook workbook = SpreadsheetGear.Factory.GetWorkbook();
-                SpreadsheetGear.IWorksheet worksheet = workbook.Worksheets["Sheet1"];
-                SpreadsheetGear.IRange cells = worksheet.Cells;
-
-                // Set the worksheet name.
-                worksheet.Name = nombreHoja.Replace('/','-');
-                
-                string ultimaColumna="";
-                int tituloIndex = 1;
-                // Load column titles.
-                for (char c = 'A'; tituloIndex <= titulos.Count(); c++)
-                {
-                    cells[c.ToString()+"1"].Formula = titulos[tituloIndex-1];
-                    
-                    if (tituloIndex == titulos.Count()) {
-                        ultimaColumna = c.ToString();
-                    }
-                    tituloIndex++;
-                }
-                //centra los titulos del reporte
-                cells["A1:"+ultimaColumna+"1"].HorizontalAlignment = SpreadsheetGear.HAlign.Center;
-                
-                //carga el contenido del reporte
-                for (int i = 0; i < contenido.Count; i++){
-                    for (int j = 0; j < contenido[i].Count; j++) {
-                        // 65 = 'A', 66 = 'B', etc. Empieza en la A2, B2, C2 ... y luego cambia de fila
-                        string celda = (char)(j+65) + (i + 2).ToString();
-                        cells[celda].Formula = contenido[i][j];
-                    }
-                }
-
-                cells["A1:" + ultimaColumna + "100"].Columns.AutoFit();
-                
-                // Stream the Excel spreadsheet to the client in a format
-                // compatible with Excel 97/2000/XP/2003/2007/2010.
-                Response.Clear();
-                Response.ContentType = "application/vnd.ms-excel";
-                Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreHoja.Replace('/', '-') + ".xls");
-                workbook.SaveToStream(Response.OutputStream, SpreadsheetGear.FileFormat.Excel8);
-                Response.End();
-            });
-            STAThread.SetApartmentState(ApartmentState.STA);
-            STAThread.Start();
-            STAThread.Join();
-        }
-
         protected void _btnConsultar_Click(object sender, EventArgs e)
         {
             //generarReporte();
@@ -224,7 +170,23 @@ namespace ModulosTICapaGUI.ModuloBitacora
                 fila = new List<string>();
             }
 
-            generarReporte("Bitacora " + _txtFechaConsulta.Text, new List<string> { "Fecha", "Operador" , "Evento" }, contenido);
+            ReporteExcel report = new ReporteExcel();
+
+            SpreadsheetGear.IWorkbook workbook = report.generarReporte("Bitacora " + _txtFechaConsulta.Text.Replace('/','-'), new List<string> { "Fecha", "Operador" , "Evento" }, contenido);
+
+            Thread STAThread = new Thread(() =>
+            {
+                // Stream the Excel spreadsheet to the client in a format
+                // compatible with Excel 97/2000/XP/2003/2007/2010.
+                Response.Clear();
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + "Bitacora " + _txtFechaConsulta.Text + ".xls");
+                workbook.SaveToStream(Response.OutputStream, SpreadsheetGear.FileFormat.Excel8);
+                Response.End();
+            });
+            STAThread.SetApartmentState(ApartmentState.STA);
+            STAThread.Start();
+            STAThread.Join();
         }
     }
 }

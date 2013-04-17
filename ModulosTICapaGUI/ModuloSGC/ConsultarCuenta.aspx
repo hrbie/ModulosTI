@@ -82,7 +82,11 @@
                                 Format="dd/MM/yyyy"/>
 					    </td>                        
                      </tr>
-                   <tr>
+                     </table> 
+                     </ContentTemplate>
+            </asp:UpdatePanel>
+                     <table align="left"  border="0" style="width: 683px; height: auto;">
+                                        <tr>
                         <td class="alinearMedioCentro" colspan="2">
 						    <asp:Button ID="_bntConsultar" runat="server" Text="Buscar" onclick="_btnConsultar_Click" style="margin-bottom: 0px" 
                                 ToolTip="Presione éste botón para buscar un usuario" />
@@ -93,8 +97,7 @@
 					    </td>
                    </tr>
                </table>
-               </ContentTemplate>
-            </asp:UpdatePanel>
+               
 		</fieldset>
         <fieldset class="fieldsetContornoBlanco"  >
             <legend class="titulos" style="text-align: left">

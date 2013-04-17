@@ -6,9 +6,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ModulosTIControlador.Clases;
 using ModulosTICapaGUI.Compartido;
+using ModulosTICapaDatos.Compartido;
 using ModulosTICapaLogica.Compartido;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace ModulosTICapaGUI.ModuloSGC
 {
@@ -159,7 +161,7 @@ namespace ModulosTICapaGUI.ModuloSGC
         protected void _btnConsultar_Click(object sender, EventArgs e)
         {
             Usuario user = null;
-			int contador = 0;
+            int contador = 0;
             _controladorSGC = new ControladorSGC();
             _imgMensajeBusqueda.Visible = false;
             _lblMensajeBusqueda.Visible = false;
@@ -197,11 +199,28 @@ namespace ModulosTICapaGUI.ModuloSGC
                     DateTime fechaFinal = DateTime.ParseExact(_txtValor3.Text, "dd/MM/yyyy", null);
                     try
                     {
-                        List<List<object>> resultado = _controladorSGC.crearArchivoUsuariosPorFecha(fechaInicial, fechaFinal);
-                        _imgMensajeBusqueda.ImageUrl = "../Imagenes/ok.png";
-                        _lblMensajeBusqueda.Text = "El archivo fue creado con éxito";
-                        _imgMensajeBusqueda.Visible = true;
-                        _lblMensajeBusqueda.Visible = true;
+                        List<List<string>> contenido = _controladorSGC.crearArchivoUsuariosPorFecha(fechaInicial, fechaFinal);
+                        
+                        string nombreArchivo = "Cuentas entre " + fechaInicial.Date.Day.ToString() + "-" + fechaInicial.Month.ToString() + "-" + fechaInicial.Year.ToString() + " y " + fechaFinal.Day.ToString() + "-" + fechaFinal.Month.ToString() + "-" + fechaFinal.Year.ToString();
+
+                        ReporteExcel report = new ReporteExcel();
+
+                        SpreadsheetGear.IWorkbook workbook = report.generarReporte(nombreArchivo, new List<string> { "Login", "Carrera", "Fecha de Creación" }, contenido);
+
+                        Thread STAThread = new Thread(() =>
+                        {
+                            // Stream the Excel spreadsheet to the client in a format
+                            // compatible with Excel 97/2000/XP/2003/2007/2010.
+                            Response.Clear();
+                            Response.ContentType = "application/vnd.ms-excel";
+                            Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreArchivo + ".xls");
+                            workbook.SaveToStream(Response.OutputStream, SpreadsheetGear.FileFormat.Excel8);
+                            Response.End();
+                        });
+
+                        STAThread.SetApartmentState(ApartmentState.STA);
+                        STAThread.Start();
+                        STAThread.Join();
                     }
                     catch (Exception ex)
                     {
@@ -211,7 +230,6 @@ namespace ModulosTICapaGUI.ModuloSGC
                         _lblMensajeBusqueda.Visible = true;
                     }
                 }
-                ////////////////////////////////////////
             }
             else
             {
@@ -349,14 +367,14 @@ namespace ModulosTICapaGUI.ModuloSGC
                 List<string> datosUsuario = new List<string>();
                 datosUsuario.Add(_txtNombre.Text);
                 datosUsuario.Add(_txtPApellido.Text);
-				datosUsuario.Add(_txtSApellido.Text);
+                datosUsuario.Add(_txtSApellido.Text);
                 datosUsuario.Add(_txtCarnet.Text);
                 datosUsuario.Add(_txtTelefono.Text);
                 datosUsuario.Add(_txtCelular.Text);
                 datosUsuario.Add(_txtValor.Text);
                 datosUsuario.Add(_txtPassword.Text);
                 datosUsuario.Add(_txtCorreo.Text);
-				datosUsuario.Add(_ddlCarrera.SelectedValue);
+                datosUsuario.Add(_ddlCarrera.SelectedValue);
                 datosUsuario.Add(_rblUsarios.SelectedValue);
                 byte[] imagen = cargarImagen();
                 //String nombreArchivo = System.IO.Path.GetFileName(_txtCargarFoto.PostedFile.FileName); // Obtener el nombre del archivo
@@ -478,7 +496,7 @@ namespace ModulosTICapaGUI.ModuloSGC
                 return null;
             }
         }
-       
+
         protected void _ddlCriterioChanged(object sender, EventArgs e)
         {
             if (_ddlCriterio.SelectedIndex == 3)
@@ -505,6 +523,6 @@ namespace ModulosTICapaGUI.ModuloSGC
                 return;
             }
         }
-        #endregion  
+        #endregion
     }
 }
