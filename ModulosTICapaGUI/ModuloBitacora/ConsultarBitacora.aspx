@@ -67,8 +67,9 @@
                 <table style="width: 100%;">
                 <tr>
                 <td style="text-align:left" class="style7"><asp:Button ID="_btnConsultar" runat="server" Text="Consultar" onclick="_btnConsultar_Click"/>  </td>
-                <td style="text-align:left"><asp:Button ID="_btnExportarExcel" runat="server" 
-                        Text="Exportar a Excel" onclick="_btnExportarExcel_Click" Enabled="False" /></td>
+                <td style="text-align:left">
+                    <asp:Button ID="_btnExportarExcel" runat="server" 
+                        Text="Exportar a Excel" onclick="_btnExportarExcel_Click" /></td>
                 </tr>
                 </table>
                               

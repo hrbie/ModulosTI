@@ -92,41 +92,53 @@ namespace ModulosTICapaGUI.ModuloBitacora
             }
         }
 
-        //
-        public void generarReporte()
-        {
+        //titulos es una lista con los titulos de las columnas que tendrá el reporte
+        //contenido es una lista de listas de string en el que cada nodo de la lista tiene una fila del reporte
+        public void generarReporte(string nombreHoja, List<string> titulos, List<List<string>> contenido){
             Thread STAThread = new Thread( ()=>
             {
+                //hacer las validaciones de tamaño del reporte
+                //maximo 26 columnas
+
                 // Create a new workbook.
                 SpreadsheetGear.IWorkbook workbook = SpreadsheetGear.Factory.GetWorkbook();
                 SpreadsheetGear.IWorksheet worksheet = workbook.Worksheets["Sheet1"];
                 SpreadsheetGear.IRange cells = worksheet.Cells;
 
                 // Set the worksheet name.
-                worksheet.Name = "2005 Sales";
+                worksheet.Name = nombreHoja.Replace('/','-');
+                
+                string ultimaColumna="";
+                int tituloIndex = 1;
+                // Load column titles.
+                for (char c = 'A'; tituloIndex <= titulos.Count(); c++)
+                {
+                    cells[c.ToString()+"1"].Formula = titulos[tituloIndex-1];
+                    
+                    if (tituloIndex == titulos.Count()) {
+                        ultimaColumna = c.ToString();
+                    }
+                    tituloIndex++;
+                }
+                //centra los titulos del reporte
+                cells["A1:"+ultimaColumna+"1"].HorizontalAlignment = SpreadsheetGear.HAlign.Center;
+                
+                //carga el contenido del reporte
+                for (int i = 0; i < contenido.Count; i++){
+                    for (int j = 0; j < contenido[i].Count; j++) {
+                        // 65 = 'A', 66 = 'B', etc. Empieza en la A2, B2, C2 ... y luego cambia de fila
+                        string celda = (char)(j+65) + (i + 2).ToString();
+                        cells[celda].Formula = contenido[i][j];
+                    }
+                }
 
-                // Load column titles and center.
-                cells["B1"].Formula = "North";
-                cells["C1"].Formula = "South";
-                cells["D1"].Formula = "East";
-                cells["E1"].Formula = "West";
-                cells["B1:E1"].HorizontalAlignment = SpreadsheetGear.HAlign.Center;
-
-                // Load row titles using multiple cell text reference and iteration.
-                int quarter = 1;
-                foreach (SpreadsheetGear.IRange cell in cells["A2:A5"])
-                    cell.Formula = "Q" + quarter++;
-
-                // Load random data and format as $ using a multiple cell range.
-                SpreadsheetGear.IRange body = cells[1, 1, 4, 4];
-                body.Formula = "=RAND() * 10000";
-                body.NumberFormat = "$#,##0_);($#,##0)";
-
+                cells["A1:" + ultimaColumna + "100"].Columns.AutoFit();
+                
                 // Stream the Excel spreadsheet to the client in a format
                 // compatible with Excel 97/2000/XP/2003/2007/2010.
                 Response.Clear();
                 Response.ContentType = "application/vnd.ms-excel";
-                Response.AddHeader("Content-Disposition", "attachment; filename=report.xls");
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreHoja.Replace('/', '-') + ".xls");
                 workbook.SaveToStream(Response.OutputStream, SpreadsheetGear.FileFormat.Excel8);
                 Response.End();
             });
@@ -195,7 +207,24 @@ namespace ModulosTICapaGUI.ModuloBitacora
 
         protected void _btnExportarExcel_Click(object sender, EventArgs e)
         {
-            generarReporte();            
+            List<List<string>> contenido = new List<List<string>>();
+            List<string> fila = new List<string>();
+            string[] badChars = { "&#225;", "&#233;", "&#237;", "&#243;", "&#250;", "&#241;" };
+            string[] goodChars = { "á", "é", "í", "ó", "ú", "ñ" };
+            foreach (GridViewRow r in _gvwEventos.Rows) {
+                for (int i = 0; i < r.Cells.Count ; i++) {
+                    string text = r.Cells[i].Text;
+                    for (int k = 0; k < badChars.Length; k++) // Limpiar caracteres
+                    {
+                        text = text.Replace(badChars[k], goodChars[k]); // Quitar tildes u caracteres especiales del nombre
+                    }
+                    fila.Add(text);
+                }
+                contenido.Add(fila);
+                fila = new List<string>();
+            }
+
+            generarReporte("Bitacora " + _txtFechaConsulta.Text, new List<string> { "Fecha", "Operador" , "Evento" }, contenido);
         }
     }
 }
