@@ -15,8 +15,11 @@ namespace ModulosTICapaDatos.Compartido
             SpreadsheetGear.IRange cells = worksheet.Cells;
 
             // Set the worksheet name.
-            worksheet.Name = nombreHoja.Replace('/', '-').Substring(0,31);
-
+            if (nombreHoja.Length > 31)
+                worksheet.Name = nombreHoja.Replace('/', '-').Substring(0, 31);
+            else
+                worksheet.Name = nombreHoja.Replace('/', '-');
+            
             string ultimaColumna = "";
             int tituloIndex = 1;
             // Load column titles.
