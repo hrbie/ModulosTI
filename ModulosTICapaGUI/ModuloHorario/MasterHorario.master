@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterHorario.master.cs" Inherits="ModulosTICapaGUI.ModuloHorario.MasterHorario" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadHorario" runat="server">
+		<title></title>
+		<script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+				if (!IsPostBack)
+				{
+					ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+					HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+					String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+					switch (grupoUsuario)
+					{
+                        case "prof":
+                            _lblConsultar.Visible = false;
+                            _lblCrear.Visible = false;
+                            _lblCrear2.Visible = false;
+                            _lblDisponibilidad.Visible = false;
+                            break;
+                        case "users":
+                            _lblConsultar.Visible = false;
+                            _lblCrear.Visible = false;
+                            _lblCrear2.Visible = false;
+                            _lblDisponibilidad.Visible = false;
+                            break;
+                        case "ests":
+                            _lblConsultar.Visible = false;
+                            _lblCrear.Visible = false;
+                            _lblCrear2.Visible = false;
+                            _lblDisponibilidad.Visible = false;
+                            break;
+						case "operadores":
+							_lblConsultar.Visible = true;
+                            _lblCrear.Visible = false;
+                            _lblCrear2.Visible = false;
+                            _lblDisponibilidad.Visible = true;
+							break;
+						case "soporte":
+							_lblConsultar.Visible = true;
+                            _lblCrear.Visible = false;
+                            _lblCrear2.Visible = true;
+                            _lblDisponibilidad.Visible = false;
+							break;
+						case "jefes":
+							_lblConsultar.Visible = true;
+                            _lblCrear.Visible = true;
+                            _lblCrear2.Visible = false;
+                            _lblDisponibilidad.Visible = true;
+							break;
+						case "jefeti":
+							_lblConsultar.Visible = true;
+                            _lblCrear.Visible = false;
+                            _lblCrear2.Visible = true;
+                            _lblDisponibilidad.Visible = false;
+							break;
+					}
+					sesion = null;
+					cookie = null;
+					grupoUsuario = null;
+				}
+			}
+		</script>
+	</asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+    <div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainHorario" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenuHorario">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblConsultar" CssClass="flotarIzquierda" runat="server">
+							<li class="primerElemento"><a href="ConsultarHorario.aspx" title="ConsultarHorario" style="height:16px;line-height:16px;">Consultar Horario</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblCrear" CssClass="flotarIzquierda" runat="server">
+							<li class="medioElemento"><a href="CrearHorario.aspx" title="CrearHorario" style="height:16px;line-height:16px;">Gestionar Horario</a></li>
+						</asp:Label>
+                        <asp:Label ID="_lblCrear2" CssClass="flotarDerecha" runat="server">
+							<li class="ultimoElemento"><a href="CrearHorario.aspx" title="CrearHorario" style="height:16px;line-height:16px;">Gestionar Horario</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblDisponibilidad" CssClass="flotarDerecha" runat="server">
+							<li class="ultimoElemento"><a href="HorarioDisponibilidad.aspx" title="HorarioDisponibilidad" style="height:16px;line-height:16px;">Horario Disponibilidad</a></li>
+						</asp:Label>
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>

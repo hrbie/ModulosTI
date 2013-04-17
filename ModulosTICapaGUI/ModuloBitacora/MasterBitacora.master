@@ -1,0 +1,71 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterBitacora.master.cs" Inherits="ModulosTICapaGUI.ModuloBitacora.MasterBitacora" %>
+  <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+      <link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadBitacora" runat="server">
+		<title></title>
+		<script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+				if (!IsPostBack)
+				{
+                    ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+                    HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+                    String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+                    switch (grupoUsuario)
+					{
+                        case "prof":
+                            _lblConsultarBit.Visible = false;
+                            _lblRegistrarBit.Visible = false;
+                            break;
+                        case "users":
+                            _lblConsultarBit.Visible = false;
+                            _lblRegistrarBit.Visible = false;
+                            break;
+                        case "ests":
+                            _lblConsultarBit.Visible = false;
+                            _lblRegistrarBit.Visible = false;
+                            break;
+						case "operadores":
+							_lblConsultarBit.Visible = true;
+                            _lblRegistrarBit.Visible = true;
+							break;
+						case "soporte":
+							_lblConsultarBit.Visible = true;
+                            _lblRegistrarBit.Visible = true;
+							break;
+						case "jefes":
+							_lblConsultarBit.Visible = true;
+                            _lblRegistrarBit.Visible = true;
+							break;
+						case "jefeti":
+							_lblConsultarBit.Visible = true;
+                            _lblRegistrarBit.Visible = true;
+							break;
+					}
+				}
+			}
+		</script>
+	</asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+    <div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainBitacora" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenuBitacora">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblRegistrarBit" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="RegistrarBitacora.aspx" title="RegistrarBit" style="height:16px;line-height:16px;">Registrar Bitácora</a></li>
+						</asp:Label>
+                        <asp:Label ID="_lblConsultarBit" runat="server" CssClass="flotarDerecha">
+							<li class="ultimoElemento"><a href="ConsultarBitacora.aspx" title="ConsultarBit" style="height:16px;line-height:16px;">Consultar Bitácora</a></li>
+						</asp:Label>
+             		</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>
+
+

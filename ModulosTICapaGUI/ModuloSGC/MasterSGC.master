@@ -1,0 +1,79 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterSGC.master.cs" Inherits="ModulosTICapaGUI.ModuloSGC.MasterSGC" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+	<link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadSGC" runat="server">
+		<title></title>
+
+
+		<script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+				if (!IsPostBack)
+				{
+					ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+					HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+					String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+					switch (grupoUsuario)
+					{
+						case "jefeti":
+							_lblCrear.Visible = true;
+							_lblGestionar.Visible = true;
+							break;  
+						
+                        case "prof":
+                            _lblCrear.Visible = false;
+							_lblGestionar.Visible = false;
+                            break;
+                        case "users":
+                            _lblCrear.Visible = false;
+							_lblGestionar.Visible = false;
+                            break;
+                        case "ests":
+                            _lblCrear.Visible = false;
+							_lblGestionar.Visible = false;
+                            break;
+						case "operadores":
+                            _lblCrear.Visible = false;
+							_lblGestionar.Visible = false;
+							break;
+						case "soporte":
+							_lblCrear.Visible = true;
+							_lblGestionar.Visible = true;
+							break;
+						case "jefes":
+							_lblCrear.Visible = false;
+							_lblGestionar.Visible = false;
+							break;
+						                     
+					}
+					sesion = null;
+					cookie = null;
+					grupoUsuario = null;
+				}
+			}
+		</script>
+
+	</asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+	<div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainSGC" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenu">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblCrear" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="CrearCuenta.aspx" title="Crear" 
+                            style="height:16px;line-height:16px;">Crear</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblGestionar" runat="server" CssClass="flotarDerecha">
+							<li class="ultimoElemento"><a href="ConsultarCuenta.aspx" title="Consultar" 
+                                    style="height:16px;line-height:16px;">Consultar</a></li>
+						</asp:Label>
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>

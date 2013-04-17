@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterSistema.master.cs" Inherits="ModulosTICapaGUI.ModuloSistema.MasterSistema" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadSistema" runat="server">
+		<title></title>
+	</asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+    <div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainSistema" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenu">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblBitacoraError" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="GestionBitError.aspx" title="Bitacora" style="height:16px;line-height:16px;">Bitácora Error</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblCrearPeriodoLectivo" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="CrearPeriodoLectivo.aspx" title="Semestre" style="height:16px;line-height:16px;">Crear Período</a></li>
+						</asp:Label>
+                        <asp:Label ID="lblConsultarPeriodoLectivo" runat="server" CssClass="flotarDerecha">
+							<li class="ultimoElemento"><a href="ModificarPeriodoLectivo.aspx" title="Semestre" style="height:16px;line-height:16px;">Modificar Período</a></li>
+						</asp:Label>
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>

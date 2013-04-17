@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterReservacion.master.cs" Inherits="ModulosTICapaGUI.ModuloReservacion.MasterReservacion" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadReservacion" runat="server">
+		<title></title>
+	</asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+    <div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainReservacion" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenu">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblReservar" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="CrearReservacion.aspx" title="Reservar" style="height:16px;line-height:16px;">Registrar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblConsultar" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="ConsultaReservacion.aspx" title="Consultar" style="height:16px;line-height:16px;">Consultar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblGestionar" runat="server" CssClass="flotarDerecha">
+							<li class="ultimoElemento"><a href="ModificaReservacion.aspx" title="Gestionar" style="height:16px;line-height:16px;">Gestionar</a></li>
+						</asp:Label>
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>

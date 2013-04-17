@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{93ACC936-2220-4E3D-B18C-81B80F0E8445}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ModulosTICapaGUI</RootNamespace>
+    <AssemblyName>ModulosTICapaGUI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.40412.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SpreadsheetGear2012.Core, Version=7.0.5.139, Culture=neutral, PublicKeyToken=39c186f5904944ec, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SpreadsheetGear2012.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Autentificacion\Login.aspx" />
+    <Content Include="Compartido\AccesoDenegado.aspx" />
+    <Content Include="Compartido\AcercaDe.aspx" />
+    <Content Include="Compartido\Estilo.css" />
+    <Content Include="Compartido\Inicio.aspx" />
+    <Content Include="Compartido\Menu.css" />
+    <Content Include="Compartido\MenuHorizontal.css" />
+    <Content Include="Imagenes\3d bar chart.bmp" />
+    <Content Include="Imagenes\bg-menu-main.png" />
+    <Content Include="Imagenes\botonLogin.png" />
+    <Content Include="Imagenes\botonLoginPulsado.png" />
+    <Content Include="Imagenes\Calendario.png" />
+    <Content Include="Imagenes\Advertencia.png" />
+    <Content Include="Imagenes\collapse.jpg" />
+    <Content Include="Imagenes\Error.png" />
+    <Content Include="Imagenes\errorLogin.png" />
+    <Content Include="Imagenes\expand.jpg" />
+    <Content Include="Imagenes\favicon.ico" />
+    <Content Include="Imagenes\favicon.png" />
+    <Content Include="Imagenes\indicator.gif" />
+    <Content Include="Imagenes\LogoTI.png" />
+    <Content Include="Imagenes\Menu\activos.png" />
+    <Content Include="Imagenes\Menu\activos1.png" />
+    <Content Include="Imagenes\Menu\conf.png" />
+    <Content Include="Imagenes\Menu\horario.png" />
+    <Content Include="Imagenes\ok.png" />
+    <Content Include="Imagenes\uploading.gif" />
+    <Content Include="index.htm" />
+    <Content Include="ModuloActivos\AgregarActivo.aspx" />
+    <Content Include="ModuloActivos\ConsultarActivo.aspx" />
+    <Content Include="ModuloActivos\ModificaActivo.aspx" />
+    <Content Include="ModuloActivos\RegistrarPrestamo.aspx" />
+    <Content Include="ModuloBitacora\ConsultarBitacora.aspx" />
+    <Content Include="ModuloBitacora\RegistrarBitacora.aspx" />
+    <Content Include="ModuloHorario\ConsultarHorario.aspx" />
+    <Content Include="ModuloHorario\CrearHorario.aspx" />
+    <Content Include="ModuloHorario\HorarioDisponibilidad.aspx" />
+    <Content Include="ModuloPEUL\ConsultarReporteUso.aspx" />
+    <Content Include="ModuloPEUL\GenerarEstadisticaUso.aspx" />
+    <Content Include="ModuloPEUL\GestionLugar.aspx" />
+    <Content Include="ModuloPEUL\RegistroUsoLaboratorio.aspx" />
+    <Content Include="ModuloPEUL\UsoLaboratorio.aspx" />
+    <Content Include="ModuloReservacion\ConsultaReservacion.aspx" />
+    <Content Include="ModuloReservacion\CrearReservacion.aspx" />
+    <Content Include="ModuloReservacion\ModificaReservacion.aspx" />
+    <Content Include="ModuloSGC\CambiarPassword.aspx" />
+    <Content Include="ModuloSGC\ConsultarCuenta.aspx" />
+    <Content Include="ModuloSGC\CrearCuenta.aspx" />
+    <Content Include="ModuloSistema\CrearPeriodoLectivo.aspx" />
+    <Content Include="ModuloSistema\GestionBitError.aspx" />
+    <Content Include="ModuloSistema\ModificarPeriodoLectivo.aspx" />
+    <Content Include="ModuloSolicitudes\AdministrarSolicitudes.aspx" />
+    <Content Include="ModuloSolicitudes\AdministrarSolicitudUsuario.aspx" />
+    <Content Include="ModuloSolicitudes\ConsultarSolicitudEncargado.aspx" />
+    <Content Include="ModuloSolicitudes\CrearSolicitud.aspx" />
+    <Content Include="ModuloSolicitudes\InicioSolicitud.aspx" />
+    <Content Include="ModuloSolicitudes\SolicitudPorSoportista.aspx" />
+    <Content Include="ModuloSolicitudes\SoporteSolicitud.aspx" />
+    <Content Include="Imagenes\banner.jpg" />
+    <Content Include="Imagenes\Borde.png" />
+    <Content Include="Imagenes\Menu\arrow.gif" />
+    <Content Include="Imagenes\Menu\arrowsub.png" />
+    <Content Include="Imagenes\Menu\bitacora.png" />
+    <Content Include="Imagenes\Menu\hsep.png" />
+    <Content Include="Imagenes\Menu\mainbk.png" />
+    <Content Include="Imagenes\Menu\peul.png" />
+    <Content Include="Imagenes\Menu\reservacion.png" />
+    <Content Include="Imagenes\Menu\sgc.png" />
+    <Content Include="Imagenes\Menu\solicitud.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Autentificacion\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Autentificacion\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compartido\AccesoDenegado.aspx.cs">
+      <DependentUpon>AccesoDenegado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compartido\AccesoDenegado.aspx.designer.cs">
+      <DependentUpon>AccesoDenegado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compartido\AcercaDe.aspx.cs">
+      <DependentUpon>AcercaDe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compartido\AcercaDe.aspx.designer.cs">
+      <DependentUpon>AcercaDe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compartido\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compartido\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Compartido\Sesion.cs" />
+    <Compile Include="ModuloActivos\AgregarActivo.aspx.cs">
+      <DependentUpon>AgregarActivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloActivos\AgregarActivo.aspx.designer.cs">
+      <DependentUpon>AgregarActivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloActivos\ConsultarActivo.aspx.cs">
+      <DependentUpon>ConsultarActivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloActivos\ConsultarActivo.aspx.designer.cs">
+      <DependentUpon>ConsultarActivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloActivos\MasterActivos.master.cs">
+      <DependentUpon>MasterActivos.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloActivos\MasterActivos.master.designer.cs">
+      <DependentUpon>MasterActivos.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloActivos\ModificaActivo.aspx.cs">
+      <DependentUpon>ModificaActivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloActivos\ModificaActivo.aspx.designer.cs">
+      <DependentUpon>ModificaActivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloActivos\RegistrarPrestamo.aspx.cs">
+      <DependentUpon>RegistrarPrestamo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloActivos\RegistrarPrestamo.aspx.designer.cs">
+      <DependentUpon>RegistrarPrestamo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloBitacora\ConsultarBitacora.aspx.cs">
+      <DependentUpon>ConsultarBitacora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloBitacora\ConsultarBitacora.aspx.designer.cs">
+      <DependentUpon>ConsultarBitacora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloBitacora\MasterBitacora.master.cs">
+      <DependentUpon>MasterBitacora.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloBitacora\MasterBitacora.master.designer.cs">
+      <DependentUpon>MasterBitacora.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloBitacora\RegistrarBitacora.aspx.cs">
+      <DependentUpon>RegistrarBitacora.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloBitacora\RegistrarBitacora.aspx.designer.cs">
+      <DependentUpon>RegistrarBitacora.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloHorario\ConsultarHorario.aspx.cs">
+      <DependentUpon>ConsultarHorario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloHorario\ConsultarHorario.aspx.designer.cs">
+      <DependentUpon>ConsultarHorario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloHorario\CrearHorario.aspx.cs">
+      <DependentUpon>CrearHorario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloHorario\CrearHorario.aspx.designer.cs">
+      <DependentUpon>CrearHorario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloHorario\HorarioDisponibilidad.aspx.cs">
+      <DependentUpon>HorarioDisponibilidad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloHorario\HorarioDisponibilidad.aspx.designer.cs">
+      <DependentUpon>HorarioDisponibilidad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloHorario\MasterHorario.master.cs">
+      <DependentUpon>MasterHorario.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloHorario\MasterHorario.master.designer.cs">
+      <DependentUpon>MasterHorario.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPEUL\ConsultarReporteUso.aspx.cs">
+      <DependentUpon>ConsultarReporteUso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPEUL\ConsultarReporteUso.aspx.designer.cs">
+      <DependentUpon>ConsultarReporteUso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPEUL\GenerarEstadisticaUso.aspx.cs">
+      <DependentUpon>GenerarEstadisticaUso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPEUL\GenerarEstadisticaUso.aspx.designer.cs">
+      <DependentUpon>GenerarEstadisticaUso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPEUL\GestionLugar.aspx.cs">
+      <DependentUpon>GestionLugar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPEUL\GestionLugar.aspx.designer.cs">
+      <DependentUpon>GestionLugar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPEUL\MasterPEUL.master.cs">
+      <DependentUpon>MasterPEUL.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPEUL\MasterPEUL.master.designer.cs">
+      <DependentUpon>MasterPEUL.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPEUL\RegistroUsoLaboratorio.aspx.cs">
+      <DependentUpon>RegistroUsoLaboratorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPEUL\RegistroUsoLaboratorio.aspx.designer.cs">
+      <DependentUpon>RegistroUsoLaboratorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPEUL\UsoLaboratorio.aspx.cs">
+      <DependentUpon>UsoLaboratorio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloPEUL\UsoLaboratorio.aspx.designer.cs">
+      <DependentUpon>UsoLaboratorio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloReservacion\ConsultaReservacion.aspx.cs">
+      <DependentUpon>ConsultaReservacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloReservacion\ConsultaReservacion.aspx.designer.cs">
+      <DependentUpon>ConsultaReservacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloReservacion\CrearReservacion.aspx.cs">
+      <DependentUpon>CrearReservacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloReservacion\CrearReservacion.aspx.designer.cs">
+      <DependentUpon>CrearReservacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloReservacion\MasterReservacion.master.cs">
+      <DependentUpon>MasterReservacion.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloReservacion\MasterReservacion.master.designer.cs">
+      <DependentUpon>MasterReservacion.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloReservacion\ModificaReservacion.aspx.cs">
+      <DependentUpon>ModificaReservacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloReservacion\ModificaReservacion.aspx.designer.cs">
+      <DependentUpon>ModificaReservacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSGC\CambiarPassword.aspx.cs">
+      <DependentUpon>CambiarPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSGC\CambiarPassword.aspx.designer.cs">
+      <DependentUpon>CambiarPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSGC\ConsultarCuenta.aspx.cs">
+      <DependentUpon>ConsultarCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSGC\ConsultarCuenta.aspx.designer.cs">
+      <DependentUpon>ConsultarCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSGC\CrearCuenta.aspx.cs">
+      <DependentUpon>CrearCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSGC\CrearCuenta.aspx.designer.cs">
+      <DependentUpon>CrearCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSGC\MasterSGC.master.cs">
+      <DependentUpon>MasterSGC.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSGC\MasterSGC.master.designer.cs">
+      <DependentUpon>MasterSGC.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSistema\CrearPeriodoLectivo.aspx.cs">
+      <DependentUpon>CrearPeriodoLectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSistema\CrearPeriodoLectivo.aspx.designer.cs">
+      <DependentUpon>CrearPeriodoLectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSistema\GestionBitError.aspx.cs">
+      <DependentUpon>GestionBitError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSistema\GestionBitError.aspx.designer.cs">
+      <DependentUpon>GestionBitError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSistema\MasterSistema.master.cs">
+      <DependentUpon>MasterSistema.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSistema\MasterSistema.master.designer.cs">
+      <DependentUpon>MasterSistema.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSistema\ModificarPeriodoLectivo.aspx.cs">
+      <DependentUpon>ModificarPeriodoLectivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSistema\ModificarPeriodoLectivo.aspx.designer.cs">
+      <DependentUpon>ModificarPeriodoLectivo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\AdministrarSolicitudes.aspx.cs">
+      <DependentUpon>AdministrarSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\AdministrarSolicitudes.aspx.designer.cs">
+      <DependentUpon>AdministrarSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\AdministrarSolicitudUsuario.aspx.cs">
+      <DependentUpon>AdministrarSolicitudUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\AdministrarSolicitudUsuario.aspx.designer.cs">
+      <DependentUpon>AdministrarSolicitudUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\ConsultarSolicitudEncargado.aspx.cs">
+      <DependentUpon>ConsultarSolicitudEncargado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\ConsultarSolicitudEncargado.aspx.designer.cs">
+      <DependentUpon>ConsultarSolicitudEncargado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\CrearSolicitud.aspx.cs">
+      <DependentUpon>CrearSolicitud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\CrearSolicitud.aspx.designer.cs">
+      <DependentUpon>CrearSolicitud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\InicioSolicitud.aspx.cs">
+      <DependentUpon>InicioSolicitud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\InicioSolicitud.aspx.designer.cs">
+      <DependentUpon>InicioSolicitud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\MasterSolicitudes.master.cs">
+      <DependentUpon>MasterSolicitudes.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\MasterSolicitudes.master.designer.cs">
+      <DependentUpon>MasterSolicitudes.master</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\SolicitudPorSoportista.aspx.cs">
+      <DependentUpon>SolicitudPorSoportista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\SolicitudPorSoportista.aspx.designer.cs">
+      <DependentUpon>SolicitudPorSoportista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\SoporteSolicitud.aspx.cs">
+      <DependentUpon>SoporteSolicitud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuloSolicitudes\SoporteSolicitud.aspx.designer.cs">
+      <DependentUpon>SoporteSolicitud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloBitacora\MasterBitacora.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Compartido\Master.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModulosTICapaLogica\ModulosTICapaLogica.csproj">
+      <Project>{6AF9F67C-B9C0-4A32-A051-5BABA60E80DE}</Project>
+      <Name>ModulosTICapaLogica</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModulosTIControlador\ModulosTIControlador.csproj">
+      <Project>{03D3F7F3-402D-4CD7-8A62-565601B15798}</Project>
+      <Name>ModulosTIControlador</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloPEUL\MasterPEUL.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloHorario\MasterHorario.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Excel\" />
+    <Folder Include="Graficos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloReservacion\MasterReservacion.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloSistema\MasterSistema.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloSGC\MasterSGC.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloSolicitudes\MasterSolicitudes.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModuloActivos\MasterActivos.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5009</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

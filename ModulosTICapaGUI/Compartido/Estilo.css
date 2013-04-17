@@ -1,0 +1,546 @@
+﻿/* Estilo para el div que define las dimensiones de la página */
+/*
+	***********************************************
+	*    Clases CSS Compartidas entre Módulos     *
+	***********************************************
+*/
+
+/* Estilo para el div que define las dimensiones de la página */
+.principal
+{
+	background-color:#CCCCCC;
+	border:solid #767676;
+	height:820px;
+	width: 1256px;
+	margin: 0 auto; /*Esto junto con el width centra independientemente del monitor*/
+}
+
+.banner /* Para ordener el div del banner de la página*/
+{
+	height:30px;
+	background-color:#224D83;
+	color:White;
+	text-align:left;
+    font-weight:bold;
+    font-family:Verdana;
+    padding-top:8px;
+    padding-left:2px;
+}
+
+.encabezado
+{
+	height:25px;
+	background-color:#FFFFFF;
+}
+
+.lateralizq
+{
+	width:240px;
+	height:592px;
+	float:left;
+	background-image:url('../Imagenes/Borde.png');
+	background-color:#CCCCCC;
+}
+
+.central
+{
+	width:1016px;
+	height:640px;
+	float:left;
+	background-color:#CCCCCC;
+}
+
+/* Alineaciones para textos, y otros forms */
+
+.alinearCentro
+{
+    text-align:center;
+}
+
+.alinearIzquierda
+{
+    text-align: left;
+}
+
+.alinearDerecha
+{
+    text-align: right;
+}
+
+.alinearArribaIzquierda
+{
+	vertical-align:top;
+	text-align:left;
+	margin-top: 0px;
+}
+
+.alinearMedioIzquierda
+{
+    vertical-align:middle;
+	text-align:left;
+}
+
+.alinearMedioCentro
+{
+    vertical-align: middle;
+    text-align: center;
+}
+
+.alinearMedioDerecha
+{
+    vertical-align:middle;
+	text-align:right;
+}
+
+.alineacionJustificado
+{
+	text-align: justify;
+}
+
+.flotarDerecha
+{
+	float: right;
+}
+
+.flotarIzquierda
+{
+	float: left;
+}
+
+/* FIN Alineaciones */
+
+/*BORRAR ESTOS HASTA FINCAMBIAR*/
+
+.alineacionIzquierda
+{
+	text-align: left;
+}
+
+.alineacionCentral
+{
+	text-align: center;
+}
+
+.alineacionDerecha
+{
+	text-align:right;
+}
+
+/*FINCAMBIAR*/
+
+.central
+{
+	width:1016px;
+	height:633px;
+	float:left;
+	background-color:#CCCCCC;
+}
+
+.contorno
+{
+	padding-left:5px;
+	padding-top:5px;
+	padding-right:5px;
+	padding-bottom:5px;
+}
+
+.titulos
+{
+	font-weight:bold;
+	color:#666666;
+	text-align:left;
+}
+
+.centrar
+{
+	margin-top: 40px;
+	margin-left:12px;
+	margin-right:12px;
+}
+
+.colorLetrasGeneral
+{
+	color: #666666;
+}
+
+.colorLetraError
+{
+	color: #FF0000;
+	font-weight: bold;
+}
+
+.letraNegrita
+{
+	color: #666666;
+	font-weight: bold;
+}
+
+/* FIN COMPARTIDO */
+
+/*
+	**************
+	* MÓDULO SGC *
+	**************
+*/
+
+
+/* Componentes de Ajax */
+
+/************ PasswordStrength Ajax ***********************/
+
+/* Para Texto */
+
+.indicadorTexto
+{
+     background-color:Gray;
+     color:White;
+     font-family:Arial;
+     font-size:x-small;
+     font-style:italic;
+     padding: 2px 3px 2px 3px;
+}
+
+.indicadorTextoTipo1
+{
+     background-color:Gray;
+     color:White;
+     font-family:Arial;
+     font-size:x-small;
+     font-style:italic;
+     padding: 2px 3px 2px 3px;
+     font-weight:bold;
+}
+.indicadorTextoTipo2
+{
+     background-color:Gray;
+     color:Yellow;
+     font-family:Arial;
+     font-size:x-small;
+     font-style:italic;
+     padding: 2px 3px 2px 3px;
+     font-weight:bold;
+}
+.indicadorTextoTipo3
+{
+     background-color:Gray;
+     color: #FFCAAF;
+     font-family:Arial;
+     font-size:x-small;
+     font-style:italic;
+     padding: 2px 3px 2px 3px;
+     font-weight:bold;
+}
+.indicadorTextoTipo4
+{
+     background-color:Gray;
+     color:Aqua;
+     font-family:Arial;
+     font-size:x-small;
+     font-style:italic;
+     padding: 2px 3px 2px 3px;
+     font-weight:bold;
+}
+.indicadorTextoTipo5
+{
+     background-color:Gray;
+     color: #93FF9E;
+     font-family:Arial;
+     font-size:x-small;
+     font-style:italic;
+     padding: 2px 3px 2px 3px;
+     font-weight:bold;
+}
+
+/* Para la Barra */
+
+.barra
+{
+	border-style: hidden;
+	width: 200px;
+	margin-left: 120px;
+}
+
+.barraTipo1
+{
+    background-image: url(../Imagenes/indicator.gif);
+    background-repeat:repeat-x;
+}
+
+.barraTipo2
+{
+    background-image: url(../Imagenes/indicator.gif);
+    background-repeat:repeat-x;
+}
+
+.barraTipo3
+{
+    background-image: url(../Imagenes/indicator.gif);
+    background-repeat:repeat-x;
+}
+
+/* FIN SGC */
+
+/*
+	*************
+	* ACERCA DE *
+	*************
+*/
+
+.acomodarNombres
+{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+/* FIN ACERCA DE */
+
+/*
+	*********
+	* LOGIN *
+	*********
+*/
+
+.panelLogin
+{
+    padding-top: 20%;
+    width:450px;
+    margin: 0 auto; /*Esto junto con el width centra independientemente del monitor*/
+}
+
+.textoLogin 
+{
+    color: White;
+    font-style: normal;
+    font-family:Dotum;
+    font-weight:bold;
+    font-size: 12px;
+}
+
+.textBoxLogin
+{
+	width: 140px;
+}
+
+.contenedor /* Fieldset */
+{
+ background: #EBF4FB ;
+ border: 2px solid #336699;
+ height: 540px;  
+}
+
+/* FIN LOGIN */
+
+/*
+	**********************
+	* MÓDULO RESERVACIÓN *
+	**********************
+*/
+
+/* FIN RESERVACIÓN */
+
+/*
+	***************
+	* MÓDULO PEUL *
+	***************
+*/
+
+div.contenedorMenu
+{
+	margin-right: 150px; /* Los margin son para centrar el div y el top para ponerlo abajo */
+	margin-left: 150px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    padding-left: 154px; /* Los padding son para centrar el menu dentro del div */
+    padding-right: 154px;
+}
+
+.contenedorTexto
+{
+     vertical-align: middle;
+     text-align:right; 
+     float:left; 
+     width: 100px;
+    height: 19px;
+}
+
+.fieldsetPrincipal
+{
+	width: 973px;
+	height: 605px;
+	background: #EBF4FB;
+}
+
+.fieldsetContornoBlanco
+{
+	border: 2px solid #336699;
+	width: 942px;
+	background: #FFFFFF;
+}
+
+.centrarGrid /* Usado para la parte de Gestión de Lugares */
+{
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.centrartConsultarReporte /* Para el grid de ConsultarReporteUso.aspx */
+{
+    margin: 20px 0px;
+}
+
+div.scroll
+{
+	overflow: scroll;
+	height: 280px;
+	Width: 933px;
+}
+
+/* FIN PEUL */
+
+/*
+	*******************
+	* MÓDULO BiTÁCORA *
+	*******************
+*/
+
+div.contenedorMenuBitacora
+{
+	margin-right: 150px; /* Los margin son para centrar el div y el top para ponerlo abajo */
+	margin-left: 150px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    padding-left: 200px; /* Los padding son para centrar el menu dentro del div */
+    padding-right: 150px;
+}
+
+div.scroll2
+{
+	overflow: scroll;
+	height: 240px;
+	Width: 945px;
+}
+
+/* FIN BITÁCORA */
+
+/*
+	******************
+	* MÓDULO HORARIO *
+	******************
+*/
+
+/*Para el Ajax del accordion*/
+
+.divHotel
+{
+    padding-top:48px;
+    width:73px;
+    float:left;
+}
+
+div.contenedorMenuHorario
+{
+	margin-right: 150px; /* Los margin son para centrar el div y el top para ponerlo abajo */
+	margin-left: 150px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    padding-left: 130px; /* Los padding son para centrar el menu dentro del div */
+    padding-right: 150px;
+}
+
+.divAcordion
+{
+    width:100%;
+    float:left;
+}
+
+.accordionHeader
+{
+    width: 100%;
+	height: 25px;
+	background-image: url('/Imagenes/bg-menu-main.png');
+	background-repeat: repeat-x;
+	color: white;
+	font-weight: bold;
+}
+
+.accordionHeaderSelected
+{
+    border: 1px solid #2F4F4F;
+    color: white;
+    background-color: #4B743A;
+	font-family: Arial, Sans-Serif;
+	font-size: 12px;
+	font-weight: bold;
+    padding: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.accordionContent
+{
+	background-color: #EBF4EA;
+    border: 1px dashed #2F4F4F;
+    border-top: none;
+    padding: 5px;
+    padding-top: 10px;
+    text-align: left;
+}
+
+.divImagen
+{
+    float:right;
+}
+
+/*FIN ACCORDION*/
+
+/* FIN HORARIO */
+
+/*
+	**********************
+	* MÓDULO IMPRESIONES *
+	**********************
+*/
+
+/* FIN IMPRESIONES */
+
+/*
+	**********************
+	* MÓDULO SOLICITUDES *
+	**********************
+*/
+
+	.ddlSolicitudes
+	{
+		width:350px;
+	}
+
+/* FIN SOLICITUDES */
+
+/*
+	******************
+	* MÓDULO SISTEMA *
+	******************
+*/
+
+.divReporte
+{
+    float: left;
+    width: 310px;
+}
+
+.divDetalle
+{
+    float: right;
+    width: 600px;
+    /*padding: 35px 10px 10px 5px;*/
+}
+
+.alinearDivReporte
+{
+    text-align: left;
+    width: 300px;
+}
+
+/* FIN SISTEMA */

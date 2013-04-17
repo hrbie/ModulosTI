@@ -1,0 +1,109 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterSolicitudes.master.cs" Inherits="ModulosTICapaGUI.ModuloSolicitudes.MasterSolicitudes" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+
+<link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadSolicitudes" runat="server">
+		<title></title>
+		<script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+				if (!IsPostBack)
+				{
+					ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+					HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+					String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+					switch (grupoUsuario)
+					{
+						case "jefeti":
+							_lblAdministrarSolicitudes.Visible = true;
+							_lblMisSolicitudes.Visible = true;
+							_lblConsultaSolicitudes.Visible = true;
+							_lblCrearSolicitud.Visible = true;
+							_lblSolicitudesSoporte.Visible = false;
+							break;  
+						
+                        case "prof":
+                            _lblAdministrarSolicitudes.Visible = false;
+                            _lblMisSolicitudes.Visible = true;
+                            _lblConsultaSolicitudes.Visible = false;
+                            _lblCrearSolicitud.Visible = true;
+                            _lblSolicitudesSoporte.Visible = false;
+                            break;
+                        case "users":
+                            _lblAdministrarSolicitudes.Visible = false;
+                            _lblMisSolicitudes.Visible = true;
+                            _lblConsultaSolicitudes.Visible = false;
+                            _lblCrearSolicitud.Visible = true;
+                            _lblSolicitudesSoporte.Visible = false;
+                            break;
+                        case "ests":
+                            _lblAdministrarSolicitudes.Visible = false;
+                            _lblMisSolicitudes.Visible = true;
+                            _lblConsultaSolicitudes.Visible = false;
+                            _lblCrearSolicitud.Visible = true;
+                            _lblSolicitudesSoporte.Visible = false;
+                            break;
+						case "operadores":
+                            _lblAdministrarSolicitudes.Visible = false;
+                            _lblMisSolicitudes.Visible = true;
+                            _lblConsultaSolicitudes.Visible = false;
+                            _lblCrearSolicitud.Visible = true;
+                            _lblSolicitudesSoporte.Visible = false;
+							break;
+						case "soporte":
+							_lblAdministrarSolicitudes.Visible = false;
+                            _lblMisSolicitudes.Visible = true;
+                            _lblConsultaSolicitudes.Visible = false;
+                            _lblCrearSolicitud.Visible = true;
+                            _lblSolicitudesSoporte.Visible = true;
+							break;
+						case "jefes":
+							_lblAdministrarSolicitudes.Visible = false;
+                            _lblMisSolicitudes.Visible = true;
+                            _lblConsultaSolicitudes.Visible = false;
+                            _lblCrearSolicitud.Visible = true;
+                            _lblSolicitudesSoporte.Visible = false;
+							break;
+						                     
+					}
+					sesion = null;
+					cookie = null;
+					grupoUsuario = null;
+				}
+			}
+		</script>
+	</asp:ContentPlaceHolder>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+
+<div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainSolicitudes" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenu">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblMisSolicitudes" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="AdministrarSolicitudUsuario.aspx" title="MisSolicitudes" style="height:16px;line-height:16px;">Mis Solicitudes</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblAdministrarSolicitudes" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="AdministrarSolicitudes.aspx" title="AdministrarSolicitudes" style="height:16px;line-height:16px;">Administrar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblConsultaSolicitudes" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="ConsultarSolicitudEncargado.aspx" title="ConsultarSolicitudes" style="height:16px;line-height:16px;">Solicitudes</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblCrearSolicitud" runat="server" CssClass="flotarDerecha">
+							<li class="ultimoElemento"><a href="CrearSolicitud.aspx" title="CrearSolicitud" style="height:16px;line-height:16px;">Crear</a></li>
+						</asp:Label>
+                        <asp:Label ID="_lblSolicitudesSoporte" runat="server" CssClass="flotarDerecha">
+							<li class="medioElemento"><a href="SoporteSolicitud.aspx" title="SolicitudesSoporte" style="height:16px;line-height:16px;">Solicitudes</a></li>
+						</asp:Label>
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+
+</asp:Content>

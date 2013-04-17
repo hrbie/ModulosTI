@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterActivos.master.cs" Inherits="ModulosTICapaGUI.ModuloActivos.MasterActivos" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadActivos" runat="server">
+		<title></title>
+        <script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+				if (!IsPostBack)
+				{
+                    ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+                    HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+                    String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+                    switch (grupoUsuario)
+					{
+                        case "prof":
+                            _lblAgregar.Visible = false;
+                            _lblConsulta.Visible = false;
+                            _lblModificar.Visible = false;
+                            _lblEntradaActivo.Visible = false;
+                            break;
+                        case "users":
+                            _lblAgregar.Visible = false;
+                            _lblConsulta.Visible = false;
+                            _lblModificar.Visible = false;
+                            _lblEntradaActivo.Visible = false;
+                            break;
+                        case "ests":
+                            _lblAgregar.Visible = false;
+                            _lblConsulta.Visible = false;
+                            _lblModificar.Visible = false;
+                            _lblEntradaActivo.Visible = false;
+                            break;
+						case "operadores":
+							_lblAgregar.Visible = false;
+                            _lblConsulta.Visible = false;
+                            _lblModificar.Visible = false;
+                            _lblEntradaActivo.Visible = false;
+							break;
+						case "soporte":
+							_lblAgregar.Visible = true;
+                            _lblConsulta.Visible = true;
+                            _lblModificar.Visible = true;
+                            _lblEntradaActivo.Visible = true;
+							break;
+						case "jefes":
+							_lblAgregar.Visible = false;
+                            _lblConsulta.Visible = true;
+                            _lblModificar.Visible = false;
+                            _lblEntradaActivo.Visible = false;
+							break;
+						case "jefeti":
+							_lblAgregar.Visible = true;
+                            _lblConsulta.Visible = true;
+                            _lblModificar.Visible = true;
+                            _lblEntradaActivo.Visible = true;
+							break;
+					}
+				}
+			}
+		</script>
+   	</asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+    <div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainActivos" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenu">
+					<ul id="menupeul1" class="medioElemento">
+                        <asp:Label ID="_lblAgregar" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="AgregarActivo.aspx" title="Gestionar" style="height:16px;line-height:16px;">Agregar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblConsulta" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="ConsultarActivo.aspx" title="Consultar" style="height:16px;line-height:16px;">Consultar</a></li>
+						</asp:Label>
+                        <asp:Label ID="_lblModificar" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="ModificaActivo.aspx" title="Modificar" style="height:16px;line-height:16px;">Modificar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblEntradaActivo" runat="server" CssClass="flotarIzquierda">
+							<li class="ultimoElemento"><a href="RegistrarPrestamo.aspx" title="Movimiento" style="height:16px;line-height:16px;">Movimiento</a></li>
+						</asp:Label>
+                        
+						
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>

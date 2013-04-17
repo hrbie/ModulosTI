@@ -1,0 +1,210 @@
+﻿<%@ Master Language="C#" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	
+	<head runat="server">
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<asp:ContentPlaceHolder id="Head" runat="server">
+		<title>PTI</title>
+		</asp:ContentPlaceHolder>
+		<link rel="stylesheet" type="text/css" href="../Compartido/Estilo.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="../Compartido/Menu.css" />
+
+		<script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+                System.Threading.Thread.Sleep(100);
+                string currenttime = DateTime.Now.ToLongTimeString();
+                _lbHoraServidor.Text = "Hora: " + currenttime;
+                ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+                HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+                
+                if (!IsPostBack)
+                {
+					
+                    String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+                    switch (grupoUsuario)
+                    {
+                        case "prof":
+                            _lblSolicitud.Visible = true;
+                            _lblReservacion.Visible = true;
+                            _lblSGC.Visible = false;
+                            _lblBitacora.Visible = false;
+                            _lblPEUL.Visible = false;
+                            _lblPEULUsuarios.Visible = true;
+                            _lblHorario.Visible = true;
+                            _lblSistema.Visible = false;
+							_lblActivos.Visible = false;
+                            break;
+                        case "users":
+                            _lblSolicitud.Visible = false;
+                            _lblReservacion.Visible = false;
+                            _lblSGC.Visible = false;
+                            _lblBitacora.Visible = false;
+                            _lblPEUL.Visible = false;
+                            _lblPEULUsuarios.Visible = true;
+                            _lblHorario.Visible = false;
+                            _lblSistema.Visible = false;
+							_lblActivos.Visible = false;
+                            break;
+                        case "ests":
+                            _lblSolicitud.Visible = false;
+                            _lblReservacion.Visible = false;
+                            _lblSGC.Visible = false;
+                            _lblBitacora.Visible = false;
+                            _lblPEUL.Visible = false;
+                            _lblPEULUsuarios.Visible = true;
+                            _lblHorario.Visible = false;
+                            _lblSistema.Visible = false;
+							_lblActivos.Visible = false;
+                            break;
+                        case "operadores":
+                            _lblSolicitud.Visible = true;
+                            _lblReservacion.Visible = true;
+                            _lblSGC.Visible = false;
+                            _lblBitacora.Visible = true;
+                            _lblPEUL.Visible = true;
+                            _lblPEULUsuarios.Visible = false;
+                            _lblHorario.Visible = true;
+                            _lblSistema.Visible = false;
+							_lblActivos.Visible = false;
+                            break;
+                        case "soporte":
+                            _lblSolicitud.Visible = true;
+                            _lblReservacion.Visible = true;
+                            _lblSGC.Visible = true;
+                            _lblBitacora.Visible = true;
+                            _lblPEUL.Visible = true;
+                            _lblPEULUsuarios.Visible = false;
+                            _lblHorario.Visible = true;
+                            _lblSistema.Visible = true;
+							_lblActivos.Visible = true;
+                            break;
+                        case "jefes":
+                           _lblSolicitud.Visible = true;
+                            _lblReservacion.Visible = true;
+                            _lblSGC.Visible = false;
+                            _lblBitacora.Visible = true;
+                            _lblPEUL.Visible = true;
+                            _lblPEULUsuarios.Visible = false;
+                            _lblHorario.Visible = true;
+                            _lblSistema.Visible = false;
+							_lblActivos.Visible = false;
+                            break;
+                        case "jefeti":
+							_lblSolicitud.Visible = true;
+							_lblReservacion.Visible = true;
+							_lblSGC.Visible = true;
+							_lblBitacora.Visible = true;
+							_lblPEUL.Visible = true;
+							_lblPEULUsuarios.Visible = false;
+                            _lblHorario.Visible = true;
+                            _lblSistema.Visible = true;
+							_lblActivos.Visible = false;
+							break;
+					}
+				}
+                _lblEtiquetaLogin.Text = sesion.obtenerLoginUsuario(cookie) ;
+			}
+
+			/// <summary>
+			/// Método que se encarga del evento del link Salir
+			/// </summary>
+			/// <param name="sender"></param>
+			/// <param name="e"></param>
+			
+			protected void _lblEtiquetaSalir_Click(object sender, EventArgs e)
+			{
+                ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+                HttpCookie cookie =  sesion.desencriptarCookie(Request.Cookies["PS"]); // Desencriptar la cookie
+				
+                cookie["Expira"] = DateTime.Now.AddDays(-1).ToString(); // Eliminar la cookie para que la aplicación no la use
+                cookie = sesion.encriptarCookie(cookie); // Volverla a encriptar
+                cookie.Expires = DateTime.Now.AddDays(-1); // Para que el browser detecta la expiración
+                Response.SetCookie(cookie);
+                Request.Cookies.Remove("PS");
+                if (Session["pkSesion"] != null)
+                {
+                    ModulosTIControlador.Clases.ControladorBitacora controlador = new ModulosTIControlador.Clases.ControladorBitacora();
+                    controlador.cerrarSesion((int)Session["pkSesion"], sesion.obtenerLoginUsuario(cookie));
+                    Session["pkSesion"] = null;      //Cierra cualquier sesion en bitacora
+                }
+                Session.Clear();
+                Response.Redirect("../Autentificacion/Login.aspx");
+			}
+        </script>
+		<link rel="shortcut icon" href="../Imagenes/favicon.ico" />
+	</head>
+	<body style="text-align:center">
+			<form runat="server">
+				<asp:ScriptManager ID="_axScriptManagerReloj" runat="server" />
+				<div class="principal">
+					<div class="encabezado">
+						<table>
+							<tr>
+								<td style="width: 945px; text-align:left; padding-left:2px">
+									<asp:Timer ID="_tmReloj" runat="server" Interval="1000"></asp:Timer>
+									<asp:UpdatePanel ID="_upReloj" UpdateMode="Conditional" ChildrenAsTriggers="false" runat="server">
+										<ContentTemplate>
+											<asp:Label id="_lbHoraServidor" runat="server" ForeColor="#808080"></asp:Label>
+										</ContentTemplate>
+										<Triggers>
+											<asp:AsyncPostBackTrigger ControlID="_tmReloj" EventName="Tick" />
+										</Triggers>
+									</asp:UpdatePanel>
+								</td>
+								<td>
+									<asp:Label runat="server" ForeColor="#808080" id="_lblEtiquetaLogin"></asp:Label>
+									&nbsp;
+									<asp:HyperLink runat="server" NavigateUrl="~/Compartido/Inicio.aspx" id="_lblEtiquetaInicio" ForeColor="#808080" Font-Underline="true">Inicio</asp:HyperLink>
+									&nbsp;
+									<asp:HyperLink runat="server" id="_lblEtiquetaAyuda" ForeColor="#808080" Font-Underline="true">Ayuda</asp:HyperLink>
+									&nbsp;
+									<asp:HyperLink runat="server" NavigateUrl="~/Compartido/AcercaDe.aspx" id="_lblEtiquetaAbout" ForeColor="#808080" Font-Underline="true">About</asp:HyperLink>
+									&nbsp;
+									<asp:HyperLink runat="server" NavigateUrl="~/ModuloSGC/CambiarPassword.aspx" id="HyperLink1" ForeColor="#808080" Font-Underline="true">Cuenta</asp:HyperLink>
+									&nbsp;
+									<asp:LinkButton ID="_lblEtiquetaSalir" CssClass="colorLetrasGeneral" 
+										runat="server" onclick="_lblEtiquetaSalir_Click">Salir</asp:LinkButton>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="banner"> Plataforma de Servicios de la Oficina de TI</div>
+					<div id="_contenedorMenu" class="lateralizq">
+						<ul id="css3menu1" class="topmenu">
+							<asp:Label ID="_lblSolicitud" runat="server">
+								<li class="topfirst"><a href="../ModuloSolicitudes/CrearSolicitud.aspx" title="Solicitud de Tareas" style="width:190px;"><span><img src="../Imagenes/Menu/solicitud.png" alt="Solicitud de Tareas"/>Solicitud de Tareas</span></a></li>
+							</asp:Label>
+							<asp:Label ID="_lblReservacion" runat="server">
+								<li><a href="../ModuloReservacion/CrearReservacion.aspx" title="Reservaciones" style="width:190px;"><span><img src="../Imagenes/Menu/reservacion.png" alt="Reservaciones"/>Reservaciones</span></a></li>
+							</asp:Label>
+							<asp:Label ID="_lblSGC" runat="server">
+								<li><a href="../ModuloSGC/CrearCuenta.aspx" title="Gestión de Cuentas" style="width:190px;"><span><img src="../Imagenes/Menu/sgc.png" alt="Gestión de Cuentas"/>Gestión de Cuentas</span></a></li>
+							</asp:Label>
+							<asp:Label ID="_lblPEUL" runat="server">
+								<li><a href="../ModuloPEUL/RegistroUsoLaboratorio.aspx" title="PEUL" style="width:190px;"><span><img src="../Imagenes/Menu/peul.png" alt="PEUL"/>PEUL</span></a></li>
+							</asp:Label>
+							<asp:Label ID="_lblPEULUsuarios" runat="server">
+								<li><a href="../ModuloPEUL/UsoLaboratorio.aspx" title="PEUL" style="width:190px;"><span><img src="../Imagenes/Menu/peul.png" alt="PEUL"/>PEUL</span></a></li>
+							</asp:Label>
+							<asp:Label ID="_lblBitacora" runat="server">
+								<li><a href="../ModuloBitacora/RegistrarBitacora.aspx" title="Bitácora" style="width:190px;"><span><img src="../Imagenes/Menu/bitacora.png" alt="Bitácora"/>Bitácora</span></a></li>
+							</asp:Label>
+                            <asp:Label ID="_lblHorario" runat="server">
+								<li><a href="../ModuloHorario/ConsultarHorario.aspx" title="Horario" style="width:190px;"><span><img src="../Imagenes/Menu/horario.png" alt="Horario"/>Horario</span></a></li>
+							</asp:Label>
+                            <asp:Label ID="_lblActivos" runat="server">
+								<li><a href="../ModuloActivos/ConsultarActivo.aspx" title="Activos" style="width:190px;"><span><img src="../Imagenes/Menu/activos1.png" alt="Activos"/>Activos</span></a></li>
+							</asp:Label>
+                            <asp:Label ID="_lblSistema" runat="server">
+								<li><a href="../ModuloSistema/GestionBitError.aspx" title="Configuración" style="width:190px;"><span><img src="../Imagenes/Menu/conf.png" alt="Configuración"/>Configuración</span></a></li>
+							</asp:Label>
+						</ul>
+					</div>
+					<asp:ContentPlaceHolder id="Main" runat="server">
+					</asp:ContentPlaceHolder>
+				</div>
+			</form>
+	</body>
+</html>

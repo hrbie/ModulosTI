@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Compartido/Master.master" AutoEventWireup="true" CodeBehind="MasterPEUL.master.cs" Inherits="ModulosTICapaGUI.ModuloPEUL.MasterPEUL" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+	<link rel="stylesheet" href="../Compartido/MenuHorizontal.css" />
+	<asp:ContentPlaceHolder id="HeadPEUL" runat="server">
+		<title></title>
+		<script type="text/c#" runat="server">
+			protected void Page_Load(object sender, EventArgs e)
+			{
+				if (!IsPostBack)
+				{
+					ModulosTICapaGUI.Compartido.Sesion sesion = new ModulosTICapaGUI.Compartido.Sesion();
+					HttpCookie cookie = sesion.verificarValidez(Request.Cookies["PS"]);
+					String grupoUsuario = sesion.obtenerGrupoUsuario(cookie);
+					switch (grupoUsuario)
+					{
+						case "operadores":
+							_lblConsultar.Visible = false;
+							_lblGestionar.Visible = false;
+							_lblRegistrar.Visible = false;
+							_lblGraficar.Visible = false;
+							break;
+						case "soporte":
+							_lblConsultar.Visible = true;
+							_lblGestionar.Visible = true;
+							_lblRegistrar.Visible = true;
+							_lblGraficar.Visible = true;
+							break;
+						case "jefes":
+							_lblConsultar.Visible = true;
+							_lblGestionar.Visible = true;
+							_lblRegistrar.Visible = true;
+							_lblGraficar.Visible = true;
+							break;
+						case "jefeti":
+							_lblConsultar.Visible = true;
+							_lblGestionar.Visible = true;
+							_lblRegistrar.Visible = true;
+							_lblGraficar.Visible = true;
+							break;
+					}
+					sesion = null;
+					cookie = null;
+					grupoUsuario = null;
+				}
+			}
+		</script>
+	</asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+	<div class="central">
+		<div class="contorno">
+			<fieldset class="fieldsetPrincipal">
+				<asp:ContentPlaceHolder id="MainPEUL" runat="server">
+				</asp:ContentPlaceHolder>
+				<div class="contenedorMenu">
+					<ul id="menupeul1" class="medioElemento">
+						<asp:Label ID="_lblRegistrar" runat="server" CssClass="flotarIzquierda">
+							<li class="primerElemento"><a href="RegistroUsoLaboratorio.aspx" title="Registrar" style="height:16px;line-height:16px;">Registrar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblConsultar" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="ConsultarReporteUso.aspx" title="Consultar" style="height:16px;line-height:16px;">Consultar</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblGraficar" runat="server" CssClass="flotarIzquierda">
+							<li class="medioElemento"><a href="GenerarEstadisticaUso.aspx" title="Graficar Uso" style="height:16px;line-height:16px;">Graficar Uso</a></li>
+						</asp:Label>
+						<asp:Label ID="_lblGestionar" runat="server" CssClass="flotarDerecha">
+							<li class="ultimoElemento"><a href="GestionLugar.aspx" title="Gestionar" style="height:16px;line-height:16px;">Gestionar</a></li>
+						</asp:Label>
+					</ul>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</asp:Content>
