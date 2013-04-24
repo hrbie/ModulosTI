@@ -160,6 +160,7 @@ namespace ModulosTICapaDatos.ModuloBitacora
         public DataTable ConsultarEntradaPorDia(int idLugar, DateTime fecha)
         {
             var tablaEventos = new DataTable();
+            tablaEventos.Columns.Add("PK_Entrada");
             tablaEventos.Columns.Add("Fecha");
             tablaEventos.Columns.Add("Operador");
             tablaEventos.Columns.Add("Evento");
@@ -177,7 +178,7 @@ namespace ModulosTICapaDatos.ModuloBitacora
                     SqlDataReader reader = consultar.ExecuteReader();
                     while (reader.Read()) //Obtiene todos lo eventos, resultado de la busqueda
                     {
-                        tablaEventos.Rows.Add(reader.GetDateTime(0), reader.GetString(1), reader.GetString(2));
+                        tablaEventos.Rows.Add(reader.GetInt32(0), reader.GetDateTime(1), reader.GetString(2), reader.GetString(3));
                     }
                     _conexion.Close();
                     return tablaEventos;

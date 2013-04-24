@@ -111,7 +111,14 @@ namespace ModulosTICapaGUI.ModuloBitacora
                     {
                         _controlador.insertarEventoBitacora((int)Session["pkSesion"], Convert.ToInt32(_ddlLaboratorios.SelectedValue), _txtComentario.Text, _sesion.obtenerLoginUsuario(_cookieActual));
                         _txtComentario.Text = "";
-                        CargarEventosSesion((int)Session["pkSesion"]);
+
+                        string fechaActual = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+                        var dt = new DataTable();
+                        dt = _controlador.consultarEntradaPorDia(Convert.ToInt32(_ddlLaboratorios.SelectedValue), fechaActual);
+                        //CargarEventosSesion((int)Session["pkSesion"]);
+                        _gvwEventos.Columns[4].Visible = true;
+                        _gvwEventos.DataSource = dt;
+                        _gvwEventos.DataBind();
                         _imgMensaje.Visible = false;
                         _lblMensaje.Visible = false;
                     }
@@ -154,7 +161,17 @@ namespace ModulosTICapaGUI.ModuloBitacora
             else // Volver a crear la cookie en el cliente, con el nuevo tiempo de expiración
                 Response.SetCookie(_cookieActual);
             _gvwEventos.EditIndex = e.NewEditIndex;
-            CargarEventosSesion((int)Session["pkSesion"]);
+
+            string fechaActual = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+            var dt = new DataTable();
+            dt = _controlador.consultarEntradaPorDia(Convert.ToInt32(_ddlLaboratorios.SelectedValue), fechaActual);
+            //CargarEventosSesion((int)Session["pkSesion"]);
+            _gvwEventos.Columns[4].Visible = true;
+            _gvwEventos.DataSource = dt;
+            _gvwEventos.DataBind();
+            _imgMensaje.Visible = false;
+            _lblMensaje.Visible = false;
+
         }
 
         protected void _gvwEventos_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -178,15 +195,38 @@ namespace ModulosTICapaGUI.ModuloBitacora
                     _lblMensaje.Visible = true;
                    
                     _gvwEventos.EditIndex = -1;
+
+                    string fechaActual = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+                    var dt = new DataTable();
+                    dt = _controlador.consultarEntradaPorDia(Convert.ToInt32(_ddlLaboratorios.SelectedValue), fechaActual);
+                    
                     CargarEventosSesion((int)Session["pkSesion"]);
+                    _gvwEventos.Columns[4].Visible = true;
+                    _gvwEventos.DataSource = dt;
+                    _gvwEventos.DataBind();
+                    _imgMensaje.Visible = false;
+                    _lblMensaje.Visible = false;
+
                 }
                 else if (resultado == 10)
                 {
                     _imgMensaje.ImageUrl = "~/Imagenes/Error.png";
-                    _lblMensaje.Text = "Ha habido un error al intentar modificar los datos del lugar";
+                    _lblMensaje.Text = "No se puede editar eventos que no hayan sido registrados en la sesión actual.";
                     _imgMensaje.Visible = true;
                     _lblMensaje.Visible = true;
-                    CargarEventosSesion((int)Session["pkSesion"]);
+                    _upMensaje.Update();
+                    _upEventos.Update();
+                    _gvwEventos.EditIndex = -1;
+
+                    string fechaActual = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+                    var dt = new DataTable();
+                    dt = _controlador.consultarEntradaPorDia(Convert.ToInt32(_ddlLaboratorios.SelectedValue), fechaActual);
+                    
+                    //CargarEventosSesion((int)Session["pkSesion"]);
+                    _gvwEventos.Columns[4].Visible = true;
+                    _gvwEventos.DataSource = dt;
+                    _gvwEventos.DataBind();
+
                 }
                 else if(resultado == 0)
                 {
@@ -207,7 +247,17 @@ namespace ModulosTICapaGUI.ModuloBitacora
             else // Volver a crear la cookie en el cliente, con el nuevo tiempo de expiración
                 Response.SetCookie(_cookieActual);
             _gvwEventos.EditIndex = -1;
-            CargarEventosSesion((int)Session["pkSesion"]);
+
+            string fechaActual = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+            var dt = new DataTable(); 
+            dt = _controlador.consultarEntradaPorDia(Convert.ToInt32(_ddlLaboratorios.SelectedValue), fechaActual);
+            //CargarEventosSesion((int)Session["pkSesion"]);
+            _gvwEventos.Columns[4].Visible = true;
+            _gvwEventos.DataSource = dt;
+            _gvwEventos.DataBind();
+            _imgMensaje.Visible = false;
+            _lblMensaje.Visible = false;
+
            // _upEventos.Update();
         }
         
@@ -313,8 +363,41 @@ namespace ModulosTICapaGUI.ModuloBitacora
                 Response.Redirect("../Autentificacion/Login.aspx"); // 
             else // Volver a crear la cookie en el cliente, con el nuevo tiempo de expiración
                 Response.SetCookie(_cookieActual);
+                        
+            string fechaActual = DateTime.Today.Year + "-" + DateTime.Today.Month + "-" + DateTime.Today.Day;
+            var dt = new DataTable();
+            dt = _controlador.consultarEntradaPorDia(Convert.ToInt32(_ddlLaboratorios.SelectedValue), fechaActual);
+            
+            if (dt.Rows.Count == 0)
+            {
+                //Crear las columnas de la tabla
+                _limpia.Columns.Add(new DataColumn("PK_Entrada"));
+                _limpia.Columns.Add(new DataColumn("Fecha"));
+                _limpia.Columns.Add(new DataColumn("Operador"));
+                _limpia.Columns.Add(new DataColumn("Evento"));
 
-            CargarEventosSesion((int)Session["pkSesion"]);
+                //Llenar la tabla, solo con la columna de turno con valor
+                _limpia.Rows.Add("", "", "", "");
+                _limpia.Rows.Add("", "", "", "");
+                _limpia.Rows.Add("", "", "", "");
+                _limpia.Rows.Add("", "", "", "");
+                _limpia.Rows.Add("", "", "", "");
+                _limpia.Rows.Add("", "", "", "");
+                _limpia.Rows.Add("", "", "", "");
+
+                _gvwEventos.DataSource = _limpia;
+                _gvwEventos.DataBind();
+                _gvwEventos.Columns[4].Visible = false;
+            }
+            else {
+                _gvwEventos.Columns[4].Visible = true;
+                _gvwEventos.DataSource = dt;
+                _gvwEventos.DataBind();
+                _imgMensaje.Visible = false;
+                _lblMensaje.Visible = false;
+            }
+            
+            //CargarEventosSesion((int)Session["pkSesion"]);
             _upEventos.Update();
             _upMensaje.Update();
         }
