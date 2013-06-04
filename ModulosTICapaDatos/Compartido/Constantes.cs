@@ -39,8 +39,8 @@ namespace ModulosTICapaDatos.Compartido
 		#region Active Directory
 
 		public static string AD_BASEDN      = "LDAP://jordan.ic-itcr.ac.cr/CN=users,DC=ic-itcr,DC=ac,DC=cr";
-		public static string AD_USER        = "jefe";
-        public static string AD_PASS        = "addPCDominio";
+		public static string AD_USER        = "adduser";
+        public static string AD_PASS        = "4ddU53r5HolaMundo";
 		public static string AD_SCHEMA_USER = "users";
 		#endregion
 
